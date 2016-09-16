@@ -43,10 +43,10 @@ _NUM_VALIDATION = 400000
 _RANDOM_SEED = 1
 
 # The number of shards per dataset split.
-_NUM_SHARDS = 10000
+_NUM_SHARDS = 1000
 
 # The number of threads for generating shards
-_NUM_THREADS = 16
+_NUM_THREADS = 32
 
 
 class ImageReader(object):
