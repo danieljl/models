@@ -30,6 +30,8 @@ import os
 import random
 import sys
 
+from concurrent.futures import ThreadPoolExecutor
+
 import tensorflow as tf
 
 from datasets import dataset_utils
@@ -42,6 +44,9 @@ _RANDOM_SEED = 1
 
 # The number of shards per dataset split.
 _NUM_SHARDS = 100  # TODO Change to 10000
+
+# The number of threads for generating shards
+_NUM_THREADS = 16
 
 
 class ImageReader(object):
@@ -118,18 +123,11 @@ def _convert_dataset(split_name, filenames, class_names_to_ids, dataset_dir):
 
     with tf.Session('') as sess:
 
-      for shard_id in range(_NUM_SHARDS):
-        output_filename = _get_dataset_filename(
-            dataset_dir, split_name, shard_id)
-
+      def _generate_shard(output_filename, shard_id):
         with tf.python_io.TFRecordWriter(output_filename) as tfrecord_writer:
           start_ndx = shard_id * num_per_shard
           end_ndx = min((shard_id+1) * num_per_shard, len(filenames))
           for i in range(start_ndx, end_ndx):
-            sys.stdout.write('\r>> Converting image %d/%d shard %d' % (
-                i+1, len(filenames), shard_id))
-            sys.stdout.flush()
-
             # Read the filename:
             image_data = tf.gfile.FastGFile(filenames[i], 'r').read()
             height, width = image_reader.read_image_dims(sess, image_data)
@@ -140,6 +138,15 @@ def _convert_dataset(split_name, filenames, class_names_to_ids, dataset_dir):
             example = dataset_utils.image_to_tfexample(
                 image_data, 'jpg', height, width, class_id)
             tfrecord_writer.write(example.SerializeToString())
+
+        print('Shard {} was generated'.format(shard_id))
+        sys.stdout.flush()
+
+      with ThreadPoolExecutor(max_workers=_NUM_THREADS) as executor:
+        for shard_id in range(_NUM_SHARDS):
+          output_filename = _get_dataset_filename(
+              dataset_dir, split_name, shard_id)
+          executor.submit(_generate_shard, output_filename, shard_id)
 
   sys.stdout.write('\n')
   sys.stdout.flush()
