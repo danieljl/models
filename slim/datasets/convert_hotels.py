@@ -37,13 +37,13 @@ import tensorflow as tf
 from datasets import dataset_utils
 
 # The number of images in the validation set.
-_NUM_VALIDATION = 4000  # TODO Change to 400000
+_NUM_VALIDATION = 400000
 
 # Seed for repeatability.
 _RANDOM_SEED = 1
 
 # The number of shards per dataset split.
-_NUM_SHARDS = 100  # TODO Change to 10000
+_NUM_SHARDS = 10000
 
 # The number of threads for generating shards
 _NUM_THREADS = 16

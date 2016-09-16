@@ -31,8 +31,7 @@ slim = tf.contrib.slim
 
 _FILE_PATTERN = 'hotels_%s_*.tfrecord'
 
-# TODO Change to (not calculated yet), 400000
-SPLITS_TO_SIZES = {'train': 35321, 'validation': 4000}
+SPLITS_TO_SIZES = {'train': 3533294, 'validation': 400000}
 
 _NUM_CLASSES = 13
 
