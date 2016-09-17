@@ -18,6 +18,7 @@ TRAIN_DIR=/data/training/inception_v1
 DATASET_DIR=/data/dataset-all
 
 THIS_DIR=$(dirname $(readlink -f "$0"))
+NUM_GPUS=${1:-4}
 
 
 echo '------------------- DOWNLOAD PRE-TRAINED CHECKPOINT -------------------'
@@ -56,7 +57,7 @@ echo -ne '\n\n\n\n\n\n\n\n'
 #   --log_every_n_steps=100 \
 #   --optimizer=rmsprop \
 #   --weight_decay=0.00004 \
-#   --num_clones=4 \
+#   --num_clones=$NUM_GPUS \
 #   --num_readers=32 \
 #   --num_preprocessing_threads=32
 # echo
@@ -94,7 +95,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --log_every_n_steps=100 \
   --optimizer=rmsprop \
   --weight_decay=0.00004 \
-  --num_clones=4 \
+  --num_clones=$NUM_GPUS \
   --num_readers=32 \
   --num_preprocessing_threads=32
 echo
