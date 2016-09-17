@@ -30,6 +30,7 @@ import os
 import random
 import sys
 
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 
 import tensorflow as tf
@@ -162,6 +163,23 @@ def _dataset_exists(dataset_dir):
   return True
 
 
+def _calculate_distribution(training_filenames, validation_filenames):
+    training_total = len(training_filenames)
+    validation_total = len(validation_filenames)
+    training = Counter([x.split('/')[-2] for x in training_filenames])
+    validation = Counter([x.split('/')[-2] for x in validation_filenames])
+
+    assert set(training.keys()) == set(validation.keys())
+    classes = sorted(training.keys())
+    for c in classes:
+      training_count, validation_count = training[c], validation[c]
+      training_percentage = 100.0 * training_count / training_total
+      validation_percentage = 100.0 * validation_count / validation_total
+      diff_percentage = training_percentage - validation_percentage
+      print('class={}: training={} validation={} diff={:.3e}'.format(
+            c, training_percentage, validation_percentage, diff_percentage))
+
+
 def run(dataset_dir):
   """Runs the download and conversion operation.
 
@@ -183,6 +201,8 @@ def run(dataset_dir):
   random.shuffle(photo_filenames)
   training_filenames = photo_filenames[_NUM_VALIDATION:]
   validation_filenames = photo_filenames[:_NUM_VALIDATION]
+
+  _calculate_distribution(training_filenames, validation_filenames)
 
   # First, convert the training and validation sets.
   _convert_dataset('train', training_filenames, class_names_to_ids,
