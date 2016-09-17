@@ -57,7 +57,7 @@ echo -ne '\n\n\n\n\n\n\n\n'
 #   --optimizer=rmsprop \
 #   --weight_decay=0.00004 \
 #   --num_clones=4 \
-#   --num_readers=8 \
+#   --num_readers=32 \
 #   --num_preprocessing_threads=32
 # echo
 # echo '======================================================================='
@@ -95,7 +95,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --optimizer=rmsprop \
   --weight_decay=0.00004 \
   --num_clones=4 \
-  --num_readers=8 \
+  --num_readers=32 \
   --num_preprocessing_threads=32
 echo
 echo '======================================================================='
