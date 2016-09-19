@@ -53,7 +53,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --batch_size=16 \
   --learning_rate=0.01 \
   --learning_rate_decay_type=fixed \
-  --save_interval_secs=3600 \
+  --save_interval_secs=600 \
   --save_summaries_secs=120 \
   --log_every_n_steps=100 \
   --optimizer=rmsprop \
@@ -92,7 +92,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --batch_size=16 \
   --learning_rate=0.0001 \
   --learning_rate_decay_type=fixed \
-  --save_interval_secs=3600 \
+  --save_interval_secs=600 \
   --save_summaries_secs=120 \
   --log_every_n_steps=100 \
   --optimizer=rmsprop \
