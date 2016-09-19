@@ -51,7 +51,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --trainable_scopes=InceptionV3/Logits,InceptionV3/AuxLogits \
   --max_number_of_steps=75000 \
   --batch_size=16 \
-  --learning_rate=0.01 \
+  --learning_rate=0.001 \
   --learning_rate_decay_type=fixed \
   --save_interval_secs=600 \
   --save_summaries_secs=120 \
