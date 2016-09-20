@@ -88,10 +88,12 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --dataset_dir=${DATASET_DIR} \
   --checkpoint_path=${TRAIN_DIR}/top \
   --model_name=inception_v3 \
-  --max_number_of_steps=150000 \
+  --max_number_of_steps=200000 \
   --batch_size=16 \
   --learning_rate=0.0008 \
-  --learning_rate_decay_type=fixed \
+  --learning_rate_decay_type=exponential \
+  --learning_rate_decay_factor=0.6 \
+  --num_epochs_per_decay=0.1358 \
   --save_interval_secs=600 \
   --save_summaries_secs=120 \
   --log_every_n_steps=100 \
