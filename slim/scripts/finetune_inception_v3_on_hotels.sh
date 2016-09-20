@@ -59,8 +59,8 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --optimizer=rmsprop \
   --weight_decay=0.00004 \
   --num_clones=$NUM_GPUS \
-  --num_readers=32 \
-  --num_preprocessing_threads=32
+  --num_readers=16 \
+  --num_preprocessing_threads=16
 echo
 echo '======================================================================='
 echo -ne '\n\n\n\n\n\n\n\n'
@@ -98,8 +98,8 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --optimizer=rmsprop \
   --weight_decay=0.00004 \
   --num_clones=$NUM_GPUS \
-  --num_readers=32 \
-  --num_preprocessing_threads=32
+  --num_readers=16 \
+  --num_preprocessing_threads=16
 echo
 echo '======================================================================='
 echo -ne '\n\n\n\n\n\n\n\n'
