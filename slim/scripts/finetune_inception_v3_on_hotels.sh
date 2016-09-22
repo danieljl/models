@@ -92,7 +92,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --batch_size=16 \
   --learning_rate=0.0004 \
   --learning_rate_decay_type=exponential \
-  --learning_rate_decay_factor=0.6 \
+  --learning_rate_decay_factor=0.75 \
   --num_epochs_per_decay=0.1358 \
   --save_interval_secs=600 \
   --save_summaries_secs=120 \
