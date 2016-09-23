@@ -101,7 +101,7 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --weight_decay=0.00004 \
   --num_clones=$NUM_GPUS \
   --num_readers=16 \
-  --num_preprocessing_threads=16
+  --num_preprocessing_threads=8
 echo
 echo '======================================================================='
 echo -ne '\n\n\n\n\n\n\n\n'
@@ -115,7 +115,7 @@ python "$THIS_DIR/../eval_image_classifier.py" \
   --dataset_split_name=validation \
   --dataset_dir=${DATASET_DIR} \
   --model_name=inception_v3 \
-  --num_preprocessing_threads=32 \
+  --num_preprocessing_threads=8 \
   --batch_size=32
 echo
 echo '======================================================================='
