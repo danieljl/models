@@ -90,14 +90,14 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --model_name=inception_v3 \
   --max_number_of_steps=200000 \
   --batch_size=16 \
-  --learning_rate=0.00005 \
+  --learning_rate=0.0001 \
   --save_interval_secs=600 \
   --save_summaries_secs=120 \
   --log_every_n_steps=100 \
   --optimizer=rmsprop \
   --weight_decay=0.00004 \
   --num_clones=$NUM_GPUS \
-  --num_readers=16 \
+  --num_readers=8 \
   --num_preprocessing_threads=8
 echo
 echo '======================================================================='
