@@ -82,7 +82,7 @@ echo -ne '\n\n\n\n\n\n\n\n'
 echo '-------------------------- TRAIN ALL LAYERS ---------------------------'
 # Fine-tune all the new layers.
 python "$THIS_DIR/../train_image_classifier.py" \
-  --train_dir=${TRAIN_DIR}/all-8x \
+  --train_dir=${TRAIN_DIR}/all-1x \
   --dataset_name=hotels \
   --dataset_split_name=train \
   --dataset_dir=${DATASET_DIR} \
@@ -106,8 +106,8 @@ echo -ne '\n\n\n\n\n\n\n\n'
 echo '------------------- EVALUATE TRAINING OF ALL LAYERS -------------------'
 # Run evaluation.
 python "$THIS_DIR/../eval_image_classifier.py" \
-  --checkpoint_path=${TRAIN_DIR}/all-8x \
-  --eval_dir=${TRAIN_DIR}/all-8x \
+  --checkpoint_path=${TRAIN_DIR}/all-1x \
+  --eval_dir=${TRAIN_DIR}/all-1x \
   --dataset_name=hotels \
   --dataset_split_name=validation \
   --dataset_dir=${DATASET_DIR} \
