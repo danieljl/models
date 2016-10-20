@@ -82,15 +82,15 @@ echo -ne '\n\n\n\n\n\n\n\n'
 echo '-------------------------- TRAIN ALL LAYERS ---------------------------'
 # Fine-tune all the new layers.
 python "$THIS_DIR/../train_image_classifier.py" \
-  --train_dir=${TRAIN_DIR}/all-1x \
+  --train_dir=${TRAIN_DIR}/all-0.1x \
   --dataset_name=hotels \
   --dataset_split_name=train \
   --dataset_dir=${DATASET_DIR} \
-  --checkpoint_path=${TRAIN_DIR}/top \
+  --checkpoint_path=${TRAIN_DIR}/all-1x \
   --model_name=inception_v3 \
   --max_number_of_steps=800000 \
   --batch_size=16 \
-  --learning_rate=0.0001 \
+  --learning_rate=0.00008 \
   --save_interval_secs=600 \
   --save_summaries_secs=120 \
   --log_every_n_steps=100 \
@@ -98,7 +98,9 @@ python "$THIS_DIR/../train_image_classifier.py" \
   --weight_decay=0.00004 \
   --num_clones=$NUM_GPUS \
   --num_readers=8 \
-  --num_preprocessing_threads=8
+  --num_preprocessing_threads=8 \
+  --learning_rate_decay_factor=0.5 \
+  --num_epochs_per_decay=1.0
 echo
 echo '======================================================================='
 echo -ne '\n\n\n\n\n\n\n\n'
@@ -106,8 +108,8 @@ echo -ne '\n\n\n\n\n\n\n\n'
 echo '------------------- EVALUATE TRAINING OF ALL LAYERS -------------------'
 # Run evaluation.
 python "$THIS_DIR/../eval_image_classifier.py" \
-  --checkpoint_path=${TRAIN_DIR}/all-1x \
-  --eval_dir=${TRAIN_DIR}/all-1x \
+  --checkpoint_path=${TRAIN_DIR}/all-0.1x \
+  --eval_dir=${TRAIN_DIR}/all-0.1x \
   --dataset_name=hotels \
   --dataset_split_name=validation \
   --dataset_dir=${DATASET_DIR} \
